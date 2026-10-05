@@ -931,8 +931,8 @@ class HaPanelDevStatistics extends KeyboardShortcutMixin(LitElement) {
         }
 
         .select-mode-chip {
-          --md-assist-chip-icon-label-space: 0;
-          --md-assist-chip-trailing-space: 8px;
+          --ha-assist-chip-icon-label-space: 0;
+          --ha-assist-chip-trailing-space: 8px;
         }
 
         ha-dialog {
@@ -946,7 +946,7 @@ class HaPanelDevStatistics extends KeyboardShortcutMixin(LitElement) {
         }
 
         ha-dropdown ha-assist-chip {
-          --md-assist-chip-trailing-space: 8px;
+          --ha-assist-chip-trailing-space: 8px;
         }
       `,
     ];
