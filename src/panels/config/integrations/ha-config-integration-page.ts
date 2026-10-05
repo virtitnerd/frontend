@@ -1601,7 +1601,7 @@ class HaConfigIntegrationPage extends SubscribeMixin(LitElement) {
         }
         .state-disabled [slot="headline"],
         .state-disabled [slot="supporting-text"] {
-          opacity: var(--md-list-item-disabled-opacity, 0.3);
+          opacity: 0.3;
         }
         ha-list-base {
           margin-top: 8px;
