@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 import type { LocalizeFunc } from "../../../src/common/translations/localize";
 import type { DataTableRowData } from "../../../src/components/data-table/ha-data-table";
 import type { RepositoryBase } from "../../../src/data/marketplace/repository";
-import { filterRepositories } from "../../../src/panels/marketplace/dashboards/dashboard-repositories";
+import {
+  filterRepositories,
+  filtersOfTab,
+  statusesOfTab,
+} from "../../../src/panels/marketplace/dashboards/dashboard-repositories";
 
 const localize = ((key: string) => key) as LocalizeFunc;
 
@@ -122,5 +126,28 @@ describe("filterRepositories", () => {
     filterRepositories(unsorted, localize);
 
     expect(names(unsorted)).toEqual(["Beta", "Alpha"]);
+  });
+});
+
+describe("filtersOfTab", () => {
+  it("only offers statuses something installed can have on the installed tab", () => {
+    expect(statusesOfTab("installed")).toEqual([
+      "pending-restart",
+      "pending-upgrade",
+      "installed",
+    ]);
+    expect(statusesOfTab("browse")).toContain("new");
+  });
+
+  it("leaves out a status picked on browse that the installed tab can't list", () => {
+    const filters = { status: ["new", "installed"], type: ["theme"] };
+
+    expect(filtersOfTab(filters, "installed")).toEqual({
+      status: ["installed"],
+      type: ["theme"],
+    });
+    expect(filtersOfTab(filters, "browse")).toEqual(filters);
+    // Kept as picked, for when browse is opened again
+    expect(filters.status).toEqual(["new", "installed"]);
   });
 });
